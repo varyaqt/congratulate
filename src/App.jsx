@@ -2,7 +2,8 @@ import React from "react";
 import {
   createSmartappDebugger,
   createAssistant,
-} from "@sberdevices/assistant-client";
+} from "@salutejs/client";
+//} from "@sberdevices/assistant-client";
 
 import "./App.css";
 import { TaskList } from './pages/TaskList';
