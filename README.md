@@ -99,21 +99,28 @@ BROWSER=none
 ## Официальная документация
 
 ### Описание Assistant Client
+
 Описание Assistant Client приведено в репозитории https://github.com/salute-developers/salutejs-client
 
 *Обратите внимание: старая страница проекта https://github.com/sberdevices/assistant-client не обновляется.*
 
 *То же с именем модуля NPM: @sberdevices/assistant-client -> '@salutejs/client.*
 
-# Документация developers.sber.ru
+## Документация developers.sber.ru
 
-- Разработка графического интерфейса: Canvas App -- Создание приложений на JavaScript -- https://developers.sber.ru/docs/ru/va/canvas/title-page 
-  
+- Разработка графического интерфейса: Canvas App -- Создание приложений на JavaScript -- https://developers.sber.ru/docs/ru/va/canvas/title-page
 - Разработка голосовой части: Code --  среда разработки на языках JavaScript и SmartApp DSL -- https://developers.sber.ru/docs/ru/va/code/overview
+
+## Поддержка
+
+Чат в телеграмме: https://t.me/smartmarket_community
+
+Заявку можно оставить в чате на сайте developers.sber.ru
 
 ## Сторонние статьи
 
 Несколько статей на Хабре (разных лет; как минимум, изменилось название модуля):
+
 - https://habr.com/ru/articles/599493/ (2022 г.)
 - https://habr.com/ru/articles/541522/ (2021 г.)
 
