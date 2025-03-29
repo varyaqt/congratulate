@@ -67,7 +67,7 @@ yarn
 yarn start
 ```
 
-Если после установки `yarn` при попытке его запустить вы получаете сообщение `The term 'yarn' is not recognized`, см. раздел "Устранение проблем".
+Если после установки `yarn` при попытке его запустить вы получаете сообщение `The term 'yarn' is not recognized`, см. раздел "Устранение проблем" ниже.
 
 Эти же команды в менеджере пакетов `npm` (уже установлен по умолчанию вместе с Nodejs):
 
@@ -75,6 +75,10 @@ yarn start
 npm install
 npm start
 ```
+
+Если при запске `npm install` выводится ошибка "Conflicting peer dependency: typescript", см. раздел "Устранение проблем" ниже.
+
+
 
 3. Должен открыться веб-браузер со страницей приложения, в котором (кроме обычного визуального интерфейса) в нижней части появится панель Ассистента с шариком слева. Кликом на шарике можно включать/отключать распознавание речи. При отключенном распознавании текст можно вводить с клавиатуры в строке справа от шарика.
    ![doc/screen.png](doc/screen.png)
@@ -167,3 +171,57 @@ yarn : The term 'yarn' is not recognized as the name of a cmdlet, function, scri
 
 В Windows настоящее время по умолчанию используется командная строка PowerShell. В некоторых случаях PowerShell не может найти команду `yarn` после установки. Наиболее простой способ решить эту проблему - запустить более старый командный процессор Cmd. В нём, как правило, всё работает.
 В случае, если это не решает проблему, можно использовать оригинальный менеджер пакетов `npm`.
+
+## "Conflicting peer dependency: typescript" при выполнении команды `npm install`
+
+### Проблема
+
+При выполнении команды для установки пакетов
+
+```
+npm install
+```
+
+Выводится следующая ошибка:
+```
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: react-scripts@5.0.1
+npm error Found: typescript@5.4.5
+npm error node_modules/typescript
+npm error   typescript@"=5.4.5" from the root project
+npm error
+npm error peerOptional typescript@"^3.2.1 || ^4" from react-scripts@5.0.1
+npm error node_modules/react-scripts
+npm error   react-scripts@"5.0.1" from the root project
+npm error
+npm error Conflicting peer dependency: typescript@4.9.5
+npm error node_modules/typescript
+npm error   peerOptional typescript@"^3.2.1 || ^4" from react-scripts@5.0.1
+npm error   node_modules/react-scripts
+npm error     react-scripts@"5.0.1" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error C:\Users\alykoshin\AppData\Local\npm-cache\_logs\2025-03-29T19_07_40_891Z-eresolve-report.txt
+npm error A complete log of this run can be found in: C:\Users\alykoshin\AppData\Local\npm-cache\_logs\2025-03-29T19_07_40_891Z-debug-0.log
+PS D:\teach\11. webdev - все материалы\05. МИСиС. 1.02. Разр.кл.-серв.прил. - 2025\Проекты для консультаций\todo-canvas-app> npm i --force
+```
+### Решение
+
+Запустить `npm i` с ключом `--force`
+```
+npm i --force
+```
+
+Или использовать команду `yarn`, если она была установлена.
+
+```
+yarn
+```
+
