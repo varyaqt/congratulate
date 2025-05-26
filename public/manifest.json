@@ -21,5 +21,16 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "app": {
+    "version": "1.0",
+    "title": "Поздравления",
+    "activationPhrases": [
+      "открой поздравления",
+      "запусти поздравления",
+      "хочу поздравление"
+    ]
+  }
 }
+
+

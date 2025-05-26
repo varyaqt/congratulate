@@ -1,54 +1,64 @@
 body {
-  background-color: #292929;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #222;
 }
 
 .container {
+  padding: 20px;
+  max-width: 600px;
   margin: 0 auto;
-  max-width: 960px;
-  padding: 0 48px;
 }
 
-.add-task,
-.task-item {
-  background-color: rgba(255, 255, 255, 0.24);
-  padding: 16px 32px;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: -3.8;
-  color: #ffffff;
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.add-task {
-  margin-top: 48px;
-  width: 100%;
-  height: 72px;
-  outline: none;
-  border: none;
-  border-radius: 64px;
-}
-
-.add-task::placeholder {
-  color: rgba(255, 255, 255, 0.56);
-}
-
-.notes {
-  margin: 36px 0 144px;
-  padding: 0;
-  list-style: none;
-}
-
-.task-item {
-  margin-bottom: 24px;
-  border-radius: 24px;
+.buttons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.done-note {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+.button {
+  padding: 15px 20px;
+  font-size: 18px;
+  background: #0044cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #0033aa;
+}
+
+.category-page {
+  text-align: left;
+}
+
+.congrats-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.congrats-item {
+  padding: 10px;
+  background: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.back-button {
+  background: #888;
+}
+
+.back-button:hover {
+  background: #666;
 }
