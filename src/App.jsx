@@ -33,29 +33,22 @@ const App = () => {
     // Функция для получения текущего состояния
     const getState = () => ({
       category,
-      // Можно добавить другие данные состояния, если нужно
+      // другие данные состояния, если нужны
     });
 
     // Инициализация ассистента
     const assistantInstance = initializeAssistant(getState);
 
-    // Обработчик входящих событий от ассистента
+    // Обработчик событий
     const handleData = (event) => {
       console.log("Событие от ассистента:", event);
 
-      // Обработка навигационных команд
       if (event.type === "navigation") {
-        switch (event.navigation.command) {
-          case "go_to_category":
-            if (event.navigation.category && data[event.navigation.category]) {
-              setCategory(event.navigation.category);
-            }
-            break;
-          case "go_home":
-            setCategory(null);
-            break;
-          default:
-            console.log("Неизвестная команда:", event.navigation.command);
+        const { command } = event.navigation;
+        if (command === "go_to_category" && event.navigation.category) {
+          setCategory(event.navigation.category);
+        } else if (command === "go_home") {
+          setCategory(null);
         }
       }
 
@@ -80,13 +73,15 @@ const App = () => {
     // Подписываемся на события
     assistantInstance.on("data", handleData);
 
-    // Сохраняем экземпляр ассистента в состоянии
+    // Сохраняем экземпляр ассистента
     setAssistant(assistantInstance);
 
-    // Функция очистки при размонтировании
+    // Функция очистки (без использования .off())
     return () => {
-      assistantInstance.off("data", handleData);
-      assistantInstance.close();
+      // Просто закрываем ассистент, если есть метод close
+      if (assistantInstance.close) {
+        assistantInstance.close();
+      }
     };
   }, [category]); // Зависимость от category, так как getState использует её
 
@@ -94,7 +89,7 @@ const App = () => {
     <div style={{ padding: 20 }}>
       {category === null ? (
         <>
-          <h1>Выберите категорию:</h1>
+          <h1>Поздравления</h1>
           {Object.entries(categories).map(([key, label]) => (
             <button
               key={key}
