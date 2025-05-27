@@ -86,31 +86,45 @@ const App = () => {
   }, [category]); // Зависимость от category, так как getState использует её
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="container">
       {category === null ? (
         <>
-          <h1>Поздравления</h1>
-          {Object.entries(categories).map(([key, label]) => (
-            <button
-              key={key}
-              onClick={() => setCategory(key)}
-              style={{ margin: 10 }}
-            >
-              {label}
-            </button>
-          ))}
+          <div className="header">
+            <h1 className="header__title">Поздравляю</h1>
+            <h2 className="header__description">
+              Выберите категорию для поздравления!
+            </h2>
+          </div>
+          <div className="menu__inner">
+            <div className="menu__list">
+              {Object.entries(categories).map(([key, label]) => (
+                <button
+                  className="button"
+                  key={key}
+                  onClick={() => setCategory(key)}
+                >
+                  <span className="button__inner">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </>
       ) : (
         <>
           <h1>{categories[category]}</h1>
-          <ul>
+          <button
+            className="button button__back"
+            onClick={() => setCategory(null)}
+          >
+            <span className="button__inner">Назад</span>
+          </button>
+          <ul className="congratulations__inner">
             {data[category].map((text, index) => (
-              <li key={index} style={{ marginBottom: 10 }}>
+              <li className="greet" key={index}>
                 {text}
               </li>
             ))}
           </ul>
-          <button onClick={() => setCategory(null)}>Назад</button>
         </>
       )}
     </div>
