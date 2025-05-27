@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import data from './data/congratulations.json';
-import {
-  createAssistant,
-  createSmartappDebugger
-} from '@sberdevices/assistant-client';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import data from "./data/congratulations.json";
+import { createAssistant, createSmartappDebugger } from "@salutejs/client";
+import "./App.css";
 
 const categories = {
-  birthday: 'День рождения',
-  newyear: 'Новый год',
-  love: 'Любимым',
-  universal: 'Универсальные',
+  birthday: "День рождения",
+  newyear: "Новый год",
+  love: "Любимым",
+  universal: "Универсальные",
 };
 
 const initializeAssistant = (getState) => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI1OWFmYjJlNi0yNzcyLTRmY2MtOTU3Zi01ODcwMTNkMWQ2ODIiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDgyODIzNTcsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODE5NTk0Nywic2lkIjoiMDZlNDBhNDEtZmQzYy00NDAxLWI1MTQtNmRhODJmODA5NWYxIn0.WukEMfOHzCtOcqqKb8mCMa8rOuw7s9uJ9207m_zKmL2R3ssBF9-z8mziRduSZKuuq6KPk5paYXanhGnMxJMtf5N9fUjqXPnWYbWlQE-WLTsbPez1ZYrUfln7N9RpTAsmAUreOXSyRBpfSrQsyeWIBNL1hv_rOEcUbXE7z2Jg099R2vcX65EvLxlP5DFOYEu_mhN0EnmTyCXoBxAMeGtMvp-B8OKdd-LyZj4ANZGNPkuuEteV4jUCdRO1YeDXmuyhGKokGPsry-83FY3Yaug_x6sRxOpoEvKPUfMT1WqCKcLofC-F0-6GY1u0tHrSbm95IFiTxV4g4wa4p0WBlyUo9lkrD5UpwiKaUYTlqLEdyNgh1CletQRTKtI7p3DLDe5z6j0VXrTn3tGpKkZXu4VMrWteL-z9qwxrLSIig5w_5Qq_YAbnuWsN2hLs3p7Wtmj31mbMNrhEH4Qo19wrv4PqVAip91uh_APIozQTz_aFsFkpu4jtURBQwa07yr7gJB3iy0cJFOD5r48FEnWA_TmFi3yz8G2qINVUL5keH8-mE_eToggHOFw9-vF5jA4bRuNdI9pgU1hTJFokGdynYC7EIJ3EEK8qzWJgE1oZK0glFlqOY8yRVHYqgIFPeQyUVjdWfXG5XEKmdXOmpGmQ8xbC8yjJ3BZb6luv5QBuArZGHOE',
-      initPhrase: 'запусти поздравления',
+      token:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJkZmY1MGNiYi00YjYwLTQ2NzYtODk2NC1lZDhhNmRjZmUyYjgiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg0NDIzODQsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODM1NTk3NCwic2lkIjoiMGZmMWIxODQtODhmZC00YTVjLTg1ZGEtMDc5NjM0NDcwOTZjIn0.r9cvLQruyr0uoSBfEcioIb2M0DMM_0vNygF9iXNZxarrgbatVffHxpbeRwaUUpJFKwFhSgl9vEewigz8HlQV0SUrDVu3AdL9HjCFx6JlNG3r-m3CPEBsFyqyMnZigI7inhEKsS2wl1k4bUbLSUyeLzeCD_q3wG02OxhwNDIeIHNbDSnB14U2dF6mwmPDWaZGxg-W_tWy_KlOTt0SMTyweOy6I6Qq5Z2e5QuF1pa1MrhpAaZqIFl2beHYap27ZDjRE38ncnQ5TESRpvcGd8YHVvQsYfhaW60QWe8XhnNZ3GAQAJqC8tPpAUEBWgCllkY-9eEeqsNWtetXvvr2ZAgGvguxzXjK253gvK16BRzqzpdx4YN6cqYmFYfQ395DckkiNNSE6AA10W7YgYKCMvnEL5rTQ3ob_2ghj15gjWsHJ-BEKczsjJiT6zwH1QEwWTcaSWOBqzgCtyzLT71gheS7MlLm-Tst_sWevZIhpKptHe7bq1UUzVp0VnwhqYCpjAAwnXcrHgF3f4rF9RVh4ucGbCNPg-q8Y0eSYXgrPtthzy-4c7EP4BLTKelwccLGtu3kRMaA7UkpP76csxElCMJCEHeRkFJ3vJjagcDHjd7QIQj6V9ibNzER7vCcgjIAsSQaK9NLBghwpWcQppNPy2Ntl7A_KinXAB8Z4k05Guor9h4",
+      initPhrase: "запусти поздравления",
       getState,
+      settings: {
+        dubbing: true, // включение озвучки
+      },
     });
   }
-
   return createAssistant({ getState });
 };
 
@@ -30,37 +30,65 @@ const App = () => {
   const [assistant, setAssistant] = useState(null);
 
   useEffect(() => {
-    const assistantInstance = initializeAssistant(() => ({ category }));
+    // Функция для получения текущего состояния
+    const getState = () => ({
+      category,
+      // Можно добавить другие данные состояния, если нужно
+    });
 
-    assistantInstance.on('data', (event) => {
-      console.log('[assistant data]:', event);
+    // Инициализация ассистента
+    const assistantInstance = initializeAssistant(getState);
 
-      const command = event.navigation?.command || event.character?.command;
+    // Обработчик входящих событий от ассистента
+    const handleData = (event) => {
+      console.log("Событие от ассистента:", event);
 
-      if (command && typeof command === 'object') {
-        const { type } = command;
-
-        if (type === 'go_to_category') {
-          const cat = command.category;
-          if (data[cat]) {
-            setCategory(cat);
-          }
-        } else if (type === 'go_home') {
-          setCategory(null);
+      // Обработка навигационных команд
+      if (event.type === "navigation") {
+        switch (event.navigation.command) {
+          case "go_to_category":
+            if (event.navigation.category && data[event.navigation.category]) {
+              setCategory(event.navigation.category);
+            }
+            break;
+          case "go_home":
+            setCategory(null);
+            break;
+          default:
+            console.log("Неизвестная команда:", event.navigation.command);
         }
       }
 
-      // fallback: распознавание по голосу
-      const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase();
-      if (text?.includes('день рождения')) setCategory('birthday');
-      else if (text?.includes('новый год')) setCategory('newyear');
-      else if (text?.includes('любим')) setCategory('love');
-      else if (text?.includes('универсаль')) setCategory('universal');
-      else if (text?.includes('назад') || text?.includes('меню')) setCategory(null);
-    });
+      // Обработка голосовых команд (ASR)
+      if (event.type === "voice") {
+        const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase() || "";
 
+        if (text.includes("день рождения")) setCategory("birthday");
+        else if (text.includes("новый год")) setCategory("newyear");
+        else if (text.includes("любим")) setCategory("love");
+        else if (text.includes("универсаль")) setCategory("universal");
+        else if (text.includes("назад") || text.includes("меню"))
+          setCategory(null);
+      }
+
+      // Обработка команд персонажа (если используется)
+      if (event.type === "character") {
+        // ... аналогичная логика обработки
+      }
+    };
+
+    // Подписываемся на события
+    assistantInstance.on("data", handleData);
+
+    // Сохраняем экземпляр ассистента в состоянии
     setAssistant(assistantInstance);
-  }, []);
+
+    // Функция очистки при размонтировании
+    return () => {
+      assistantInstance.off("data", handleData);
+      assistantInstance.close();
+    };
+  }, [category]); // Зависимость от category, так как getState использует её
 
   return (
     <div style={{ padding: 20 }}>
@@ -68,7 +96,11 @@ const App = () => {
         <>
           <h1>Выберите категорию:</h1>
           {Object.entries(categories).map(([key, label]) => (
-            <button key={key} onClick={() => setCategory(key)} style={{ margin: 10 }}>
+            <button
+              key={key}
+              onClick={() => setCategory(key)}
+              style={{ margin: 10 }}
+            >
               {label}
             </button>
           ))}
@@ -78,7 +110,9 @@ const App = () => {
           <h1>{categories[category]}</h1>
           <ul>
             {data[category].map((text, index) => (
-              <li key={index} style={{ marginBottom: 10 }}>{text}</li>
+              <li key={index} style={{ marginBottom: 10 }}>
+                {text}
+              </li>
             ))}
           </ul>
           <button onClick={() => setCategory(null)}>Назад</button>
