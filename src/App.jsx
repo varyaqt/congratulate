@@ -111,7 +111,7 @@ const App = () => {
         </>
       ) : (
         <>
-          <h1>{categories[category]}</h1>
+          <h1 className="header__title">{categories[category]}</h1>
           <button
             className="button button__back"
             onClick={() => setCategory(null)}
