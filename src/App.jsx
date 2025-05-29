@@ -14,7 +14,7 @@ const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI0YTE2NzBiZi00Y2JjLTRiYjEtODRkZi1kMjJiODg4YTg0NmQiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg1MDYxODIsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODQxOTc3Miwic2lkIjoiZjYyM2UyYzctY2I0Ny00NDlhLTgwMWEtM2MyMmExNTkxNTBjIn0.Zygf7_8p7dxJx2E7aC4NR_8KsNCTnxBUkjMMEXO9kl_4bQyBCOwiMZlYmC_4MCL7M6lON0btEs9e63MloB0VZ9dQrmie6COUMtiE0vO8y058YO9KNSL6EX1V1QixQht61uN2v_usdu93OpzYwAjVjzktHk0XThGmiOTVyZhPqdm91pzWS9SI-UyuzYg4AcPQoq5bgRIfxfR3UCDNJZjNT1NG_D2CZJ9PP_Zh54cfowC6WULNRV7WjwDb263OaBSM60hKwNhXfOyv9H7CzBzomMf4Joqebtk6I7qu-ajR4iQQjbBgVGg6EZNvrW3zMZXaLqQFwWMQEzW8Hzh7jeaJDgoPGI91f2WGJeWRvBTE6McnMKrIwGa2HsNeT7P1cBXQhA8pELphXRFo4L8JDKfK0EycBNM_CCIgnpEmN37SD0BKzdwjXt9EV6riLTrmLXi0qiYBrplZQ3FPV_04DVLlDQjf63Aq_2JS56jRaebwB3jfc8402twCvkXZLjeehjbXn3CKSLj1GDLSAVE_YykWRuHCiSZq1GO-BWv_vTl43wn_jgDgPrLHO8byaNhof6Jq9R3Mp5Mo21N8KZxf8IGMYjhD4dsXXmZmCNq7hck2kItJKpEKTc1szzlgWi8O1zxs8T4rNPmQ2j3g1YYaGSbcn8TXSzcD2zkFN3s5tfscdzc",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI2YTdiZmQyMy1kMWUwLTRiNGUtYjQwMC03MjBlOTlmMzYyNWEiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg2MjA4MjUsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODUzNDQxNSwic2lkIjoiNWU4ZjhjNzEtN2ViNy00YWM2LTgzMjAtMDk5YWZhZmJjZDljIn0.WpyhosmZKWM6I8W0paGAOLBhTBY2T9SWk7nG7MDY2ExZUdvZSgKxfu2A_w9FDsPdYnlSl6JSYxkKpT1It9n-AglkrfeCvvfjSH411fey0_8z4GKIC40UfbkJIMruLQl9ilfdTUkiQzupjljv-VNideiF1auRqbOH-70CnNwnxvFsB88BWKBaDGpl2gQHSixzkDM4yjjy5PX-CS77SFFR_WK23Wu53rNUZvSMFeM_FHzSCjtHmXorqX2npYUfeCTxWn7tPEyOh5bTSTJ0yHuxqowGt6XgWvd0tLCUlV7mFgAmiys6jywwbtKmdsRQocLo-Jlxn0CoHu51TSYAlXNvYj5SW1zsQMN8QZUO05KAkXEFuejFGLn6CdQifeMRHDCuSI9U9Lo8k8TyO6XsLojOJ_JbYV2AD1xYiH059zDAj-8_q6FIYG8Vk28NpKp_DEEgSgTOYhUkmCcwnEdIe_30TRr_HDO679TjJ9heBehJioiMt6gr2ZIAY3fyalJ16ORQPTanQbuBipUd74OCQ6yOxtauOy-chJ28nHvwUZBAjrAd-LaWrV2qMk1B6kHZdsmhCmXwcc0kYyS-ZbHcRlIGix94HAExNrr2pR3FTKQ_so_URYEOxH0WUIKA2jt78jRNcAlDPG1GO0KInVYcF-iiWe9sZBYG7BjPxXQDz3IhBrY",
       initPhrase: "запусти поздравления",
       getState,
       settings: {
@@ -52,10 +52,19 @@ const App = () => {
         }
       }
 
+      // Обработка smart_app_data (действия из reply.js)
+      if (event.type === "smart_app_data") {
+        const { action } = event;
+        if (action.type === "go_to_category" && action.category) {
+          setCategory(action.category);
+        } else if (action.type === "go_home") {
+          setCategory(null);
+        }
+      }
+
       // Обработка голосовых команд (ASR)
       if (event.type === "voice") {
         const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase() || "";
-
         if (text.includes("день рождения")) setCategory("birthday");
         else if (text.includes("новый год")) setCategory("newyear");
         else if (text.includes("любим")) setCategory("love");
@@ -63,27 +72,14 @@ const App = () => {
         else if (text.includes("назад") || text.includes("меню"))
           setCategory(null);
       }
-
-      // Обработка команд персонажа (если используется)
-      if (event.type === "character") {
-        // ... аналогичная логика обработки
-      }
     };
 
-    // Подписываемся на события
     assistantInstance.on("data", handleData);
-
-    // Сохраняем экземпляр ассистента
     setAssistant(assistantInstance);
-
-    // Функция очистки (без использования .off())
     return () => {
-      // Просто закрываем ассистент, если есть метод close
-      if (assistantInstance.close) {
-        assistantInstance.close();
-      }
+      if (assistantInstance.close) assistantInstance.close();
     };
-  }, [category]); // Зависимость от category, так как getState использует её
+  }, [category]);
 
   return (
     <div className="container">
