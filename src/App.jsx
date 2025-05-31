@@ -15,7 +15,7 @@ const initializeAssistant = (getState) => {
     return createSmartappDebugger({
       token:
         "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIzODU1MGY3NS1jMTI4LTQwNjgtYmIwYS1iYTJlMmY3NWI4YjkiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg2ODg3MDcsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODYwMjI5Nywic2lkIjoiYTI4MDZiZmEtOGE3MC00Y2Q1LWFlMjMtMWYyOWMxZTNjZDJhIn0.KcCVcH34TCRDW8pgGrXAwX8cu4Sx6v2YKjn-FEt_FoENrzOUkBs1Yr0bGYUZ1do-hglxcGB32i-2E0Tq73ttjGfcGpzLiU1E5z9NuT7ZfyiskSI8d-KiuPAC2dIJfExGRsp11FrQsN5Q_OAQUR7SGC2A0T3-PZExRQvafk8TxJSQIc19Bjvq9ns1BYhWDlTmpjMw6MxwedXJ3tXOtsUSoyNA5FTvyJfeawfvMIkdSaK6n49I9qlpRvfm7BkagTxkKTbEfKUoNFA49xhD-9qEzcX-mOg0Fr8fDxZQyXrs_di0EHJWcTq3DstvZr6R3LQHCIA9xxBDNTjMJ4h2sZu3WW-kUdSttxcYPNtjahKetoY03VbwwqIx0gFe4HgO5n1mFa-h7mFGwfxGmS1DEWj2bpWbTWf-R6lYWUfywYKBbr7G27YCtSYhO9L4joCuwEqSrzNNVaGGfmuApLHTwrVMZvFZqze-vzcEBCPPSdebdiqa4xatqF8_p8k7EyU3mGvJmlbSS4hbJQ5zuYF_ceOP3yZzT6X4BRv6tDRwABv7Rrua6CZaIYJ961Zl9Pv8z4L0m8aqfcrGih0GFeyKwiKG6YyKzDb3lVhp4qHBRhFW5K_rgenAeGtiSpzbpTH849qrplFKSewKHSsvLuQzfM25st5X3yryAMtlb6GwpffWjhg",
-      initPhrase: "запусти поздравления",
+      initPhrase: "запусти Поздравлю",
       getState,
       settings: {
         dubbing: true, // включение озвучки
@@ -51,8 +51,8 @@ const App = () => {
 
         if (event.type === "navigation") {
           const { command } = event.navigation;
-          if (command === "go_to_category" && event.navigation.category) {
-            setCategory(event.navigation.category);
+          if (command === "go_to_category" && event?.navigation?.category) {
+            setCategory(event?.navigation?.category);
           } else if (command === "go_home") {
             setCategory(null);
           }
@@ -60,10 +60,10 @@ const App = () => {
 
         // Обработка smart_app_data (действия из reply.js)
         if (event.type === "smart_app_data") {
-          const { action } = event;
-          if (action.type === "go_to_category" && action.category) {
-            setCategory(action.category);
-          } else if (action.type === "go_home") {
+          const { command } = event;
+          if (command?.type === "go_to_category" && command?.category) {
+            setCategory(command?.category);
+          } else if (command?.type === "go_home") {
             setCategory(null);
           }
         }
