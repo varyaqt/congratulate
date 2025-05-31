@@ -14,8 +14,8 @@ const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI0YTE2NzBiZi00Y2JjLTRiYjEtODRkZi1kMjJiODg4YTg0NmQiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg1MDYxODIsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODQxOTc3Miwic2lkIjoiZjYyM2UyYzctY2I0Ny00NDlhLTgwMWEtM2MyMmExNTkxNTBjIn0.Zygf7_8p7dxJx2E7aC4NR_8KsNCTnxBUkjMMEXO9kl_4bQyBCOwiMZlYmC_4MCL7M6lON0btEs9e63MloB0VZ9dQrmie6COUMtiE0vO8y058YO9KNSL6EX1V1QixQht61uN2v_usdu93OpzYwAjVjzktHk0XThGmiOTVyZhPqdm91pzWS9SI-UyuzYg4AcPQoq5bgRIfxfR3UCDNJZjNT1NG_D2CZJ9PP_Zh54cfowC6WULNRV7WjwDb263OaBSM60hKwNhXfOyv9H7CzBzomMf4Joqebtk6I7qu-ajR4iQQjbBgVGg6EZNvrW3zMZXaLqQFwWMQEzW8Hzh7jeaJDgoPGI91f2WGJeWRvBTE6McnMKrIwGa2HsNeT7P1cBXQhA8pELphXRFo4L8JDKfK0EycBNM_CCIgnpEmN37SD0BKzdwjXt9EV6riLTrmLXi0qiYBrplZQ3FPV_04DVLlDQjf63Aq_2JS56jRaebwB3jfc8402twCvkXZLjeehjbXn3CKSLj1GDLSAVE_YykWRuHCiSZq1GO-BWv_vTl43wn_jgDgPrLHO8byaNhof6Jq9R3Mp5Mo21N8KZxf8IGMYjhD4dsXXmZmCNq7hck2kItJKpEKTc1szzlgWi8O1zxs8T4rNPmQ2j3g1YYaGSbcn8TXSzcD2zkFN3s5tfscdzc",
-      initPhrase: "запусти поздравления",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIzODU1MGY3NS1jMTI4LTQwNjgtYmIwYS1iYTJlMmY3NWI4YjkiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg2ODg3MDcsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODYwMjI5Nywic2lkIjoiYTI4MDZiZmEtOGE3MC00Y2Q1LWFlMjMtMWYyOWMxZTNjZDJhIn0.KcCVcH34TCRDW8pgGrXAwX8cu4Sx6v2YKjn-FEt_FoENrzOUkBs1Yr0bGYUZ1do-hglxcGB32i-2E0Tq73ttjGfcGpzLiU1E5z9NuT7ZfyiskSI8d-KiuPAC2dIJfExGRsp11FrQsN5Q_OAQUR7SGC2A0T3-PZExRQvafk8TxJSQIc19Bjvq9ns1BYhWDlTmpjMw6MxwedXJ3tXOtsUSoyNA5FTvyJfeawfvMIkdSaK6n49I9qlpRvfm7BkagTxkKTbEfKUoNFA49xhD-9qEzcX-mOg0Fr8fDxZQyXrs_di0EHJWcTq3DstvZr6R3LQHCIA9xxBDNTjMJ4h2sZu3WW-kUdSttxcYPNtjahKetoY03VbwwqIx0gFe4HgO5n1mFa-h7mFGwfxGmS1DEWj2bpWbTWf-R6lYWUfywYKBbr7G27YCtSYhO9L4joCuwEqSrzNNVaGGfmuApLHTwrVMZvFZqze-vzcEBCPPSdebdiqa4xatqF8_p8k7EyU3mGvJmlbSS4hbJQ5zuYF_ceOP3yZzT6X4BRv6tDRwABv7Rrua6CZaIYJ961Zl9Pv8z4L0m8aqfcrGih0GFeyKwiKG6YyKzDb3lVhp4qHBRhFW5K_rgenAeGtiSpzbpTH849qrplFKSewKHSsvLuQzfM25st5X3yryAMtlb6GwpffWjhg",
+      initPhrase: "запусти Поздравлю",
       getState,
       settings: {
         dubbing: true, // включение озвучки
@@ -28,62 +28,106 @@ const initializeAssistant = (getState) => {
 const App = () => {
   const [category, setCategory] = useState(null);
   const [assistant, setAssistant] = useState(null);
+  const [initError, setInitError] = useState(null); // Новое состояние для ошибки
 
   useEffect(() => {
-    // Функция для получения текущего состояния
     const getState = () => ({
       category,
-      // другие данные состояния, если нужны
     });
 
-    // Инициализация ассистента
-    const assistantInstance = initializeAssistant(getState);
+    try {
+      const assistantInstance = initializeAssistant(getState);
 
-    // Обработчик событий
-    const handleData = (event) => {
-      console.log("Событие от ассистента:", event);
+      // Добавляем обработчик ошибок соединения
+      assistantInstance.on("error", (error) => {
+        console.error("Assistant error:", error);
+        setInitError(
+          "Не удалось подключиться к ассистенту. Проверьте настройки."
+        );
+      });
 
-      if (event.type === "navigation") {
-        const { command } = event.navigation;
-        if (command === "go_to_category" && event.navigation.category) {
-          setCategory(event.navigation.category);
-        } else if (command === "go_home") {
-          setCategory(null);
+      const handleData = (event) => {
+        console.log("Событие от ассистента:", event);
+
+        if (event.type === "navigation") {
+          const { command } = event.navigation;
+          if (command === "go_to_category" && event?.navigation?.category) {
+            setCategory(event?.navigation?.category);
+          } else if (command === "go_home") {
+            setCategory(null);
+          }
         }
-      }
 
-      // Обработка голосовых команд (ASR)
-      if (event.type === "voice") {
-        const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase() || "";
+        // Обработка smart_app_data (действия из reply.js)
+        if (event.type === "smart_app_data") {
+          const { command } = event;
+          if (command?.type === "go_to_category" && command?.category) {
+            setCategory(command?.category);
+          } else if (command?.type === "go_home") {
+            setCategory(null);
+          }
+        }
 
-        if (text.includes("день рождения")) setCategory("birthday");
-        else if (text.includes("новый год")) setCategory("newyear");
-        else if (text.includes("любим")) setCategory("love");
-        else if (text.includes("универсаль")) setCategory("universal");
-        else if (text.includes("назад") || text.includes("меню"))
-          setCategory(null);
-      }
+        // Обработка голосовых команд (ASR) - ЗАМЕНЯЕМ ЭТУ ЧАСТЬ
+        if (event.type === "voice") {
+          const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase() || "";
+          console.log("Распознанная голосовая команда:", text); // Добавляем лог
 
-      // Обработка команд персонажа (если используется)
-      if (event.type === "character") {
-        // ... аналогичная логика обработки
-      }
-    };
+          // Улучшенная обработка команд
+          if (
+            text.includes("день рождения") ||
+            text.includes("с днем рождения")
+          ) {
+            setCategory("birthday");
+            assistant?.sendAction({
+              type: "go_to_category",
+              category: "birthday",
+            });
+          } else if (
+            text.includes("новый год") ||
+            text.includes("с новым годом")
+          ) {
+            setCategory("newyear");
+            assistant?.sendAction({
+              type: "go_to_category",
+              category: "newyear",
+            });
+          } else if (text.includes("любим") || text.includes("для любимых")) {
+            setCategory("love");
+            assistant?.sendAction({ type: "go_to_category", category: "love" });
+          } else if (
+            text.includes("универсаль") ||
+            text.includes("универсальные")
+          ) {
+            setCategory("universal");
+            assistant?.sendAction({
+              type: "go_to_category",
+              category: "universal",
+            });
+          } else if (
+            text.includes("назад") ||
+            text.includes("меню") ||
+            text.includes("домой")
+          ) {
+            setCategory(null);
+            assistant?.sendAction({ type: "go_home" });
+          }
+        }
+      };
 
-    // Подписываемся на события
-    assistantInstance.on("data", handleData);
+      assistantInstance.on("data", handleData);
+      setAssistant(assistantInstance);
+    } catch (e) {
+      console.error("Assistant initialization failed:", e);
+      setInitError(
+        "Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию."
+      );
+    }
 
-    // Сохраняем экземпляр ассистента
-    setAssistant(assistantInstance);
-
-    // Функция очистки (без использования .off())
     return () => {
-      // Просто закрываем ассистент, если есть метод close
-      if (assistantInstance.close) {
-        assistantInstance.close();
-      }
+      if (assistant?.close) assistant.close();
     };
-  }, [category]); // Зависимость от category, так как getState использует её
+  }, [category]);
 
   return (
     <div className="container">
