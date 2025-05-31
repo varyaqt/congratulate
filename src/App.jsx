@@ -14,7 +14,7 @@ const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
       token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIzODU1MGY3NS1jMTI4LTQwNjgtYmIwYS1iYTJlMmY3NWI4YjkiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg2ODg3MDcsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODYwMjI5Nywic2lkIjoiYTI4MDZiZmEtOGE3MC00Y2Q1LWFlMjMtMWYyOWMxZTNjZDJhIn0.KcCVcH34TCRDW8pgGrXAwX8cu4Sx6v2YKjn-FEt_FoENrzOUkBs1Yr0bGYUZ1do-hglxcGB32i-2E0Tq73ttjGfcGpzLiU1E5z9NuT7ZfyiskSI8d-KiuPAC2dIJfExGRsp11FrQsN5Q_OAQUR7SGC2A0T3-PZExRQvafk8TxJSQIc19Bjvq9ns1BYhWDlTmpjMw6MxwedXJ3tXOtsUSoyNA5FTvyJfeawfvMIkdSaK6n49I9qlpRvfm7BkagTxkKTbEfKUoNFA49xhD-9qEzcX-mOg0Fr8fDxZQyXrs_di0EHJWcTq3DstvZr6R3LQHCIA9xxBDNTjMJ4h2sZu3WW-kUdSttxcYPNtjahKetoY03VbwwqIx0gFe4HgO5n1mFa-h7mFGwfxGmS1DEWj2bpWbTWf-R6lYWUfywYKBbr7G27YCtSYhO9L4joCuwEqSrzNNVaGGfmuApLHTwrVMZvFZqze-vzcEBCPPSdebdiqa4xatqF8_p8k7EyU3mGvJmlbSS4hbJQ5zuYF_ceOP3yZzT6X4BRv6tDRwABv7Rrua6CZaIYJ961Zl9Pv8z4L0m8aqfcrGih0GFeyKwiKG6YyKzDb3lVhp4qHBRhFW5K_rgenAeGtiSpzbpTH849qrplFKSewKHSsvLuQzfM25st5X3yryAMtlb6GwpffWjhg",
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI2NzI3ZmNiYi0zZTUwLTQ4MGItYjIyMS1lODg1MzFmNmQwODIiLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg3OTQ5NzgsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODcwODU2OCwic2lkIjoiNTkxNzJkNjEtNTIwMy00YTNmLWJhZTctMTBmMzZlMzA2MzMzIn0.ZQ4aujGXimKMMeXEna21ha5SonGD5PiRsVzt0AcrJy0Jxr3c0oU03iHEFJE1rvNyTStc1_wupWyX-7cMpRorbHwZPGy8fg5KjujOu9HvD5w_qzS11JzTkd5I7in0kE9bond0UyoweGuvJ5_sixMyx9-jV4--oCdkcJRUEaEjrCAbZVN2vk6VC91Z_zKvyqzveZL_Ju8yqtIy33PtkShqkLn593bqH-R_dHfhtGrmfEqQwP-RHBvQbvOSwmmNRuAPmS8NpIoGeh-xyNK2UYMhwqXAn6jntbmyH7edWX-0FlqQYXKevdpatn48_4pTu2677RpdlhloIa929QBSIJo2Kb5Xbw9qN6x6rAZB4ufBlvnH3Cn32W4PZLaGc5vpVde_NlgU_Yptnw2aryQeLJF5et58rgSIYmZAIj1byFQ9q1PGW_9f5hpPt8dKy3An0oR5LE87xHfvr5ld1wtCiQ-IAE2HJ2j8rTTR_8Os7iuwDbZLxAM-FJ-pvfCgpBn8TJjyK1HVjeoDyJ_0ONj3Ai47uBTl0rFuH8KiC_0NdNdNOrWLB22y9reT8EngegWk610Cbh-iM8Fom1-ZM7AJCt8osTi-WVBSDdDPGD6gXotxaQ5tAG2ShJnJ9jTO8vrRlHrF-tWNo1YhrAUFbfnz5KoF6Mb3MUzDe6H-nyRD2glW-So",
       initPhrase: "запусти Поздравлю",
       getState,
       settings: {
@@ -58,12 +58,11 @@ const App = () => {
           }
         }
 
-        // Обработка smart_app_data (действия из reply.js)
         if (event.type === "smart_app_data") {
-          const { command } = event;
-          if (command?.type === "go_to_category" && command?.category) {
-            setCategory(command?.category);
-          } else if (command?.type === "go_home") {
+          const action = event.action;
+          if (action?.type === "go_to_category" && action?.category) {
+            setCategory(action.category);
+          } else if (action?.type === "go_home") {
             setCategory(null);
           }
         }
@@ -160,7 +159,7 @@ const App = () => {
             className="button button__back"
             onClick={() => setCategory(null)}
           >
-            <span className="button__inner">Назад</span>
+            <span className="button__inner">Вернуться в меню</span>
           </button>
           <ul className="congratulations__inner">
             {data[category].map((text, index) => (
