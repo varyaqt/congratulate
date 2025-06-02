@@ -163,6 +163,7 @@ body {
   font-family: var(--font-family-base);
   color: var(--color-red);
   background-color: var(--color-yellow);
+  padding-bottom: 20rem;
 }
 body:before {
   position: fixed;
