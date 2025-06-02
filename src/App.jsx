@@ -13,12 +13,11 @@ const categories = {
 const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
-      token:
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIxOGUwYTM0MS1iY2EzLTQxZGUtYjEwZS02ZjgyNjQ5ZjAyYzciLCJzdWIiOiJmZjAwMThiMDljY2RjOWQyYjhmNDc0NmU1NTUyNGE0ODE4YzM1ZTUyMmRlM2NhYjllNzhkNjE1MDE4NDA2OWYwZGQyYjQiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3NDg5Nzk4NzcsImF1ZCI6IlZQUyIsInVzciI6IjViODNkNTg4LWEyMDgtNDUwNi05YjlhLTk0NGI4NDY3MjIyZSIsImlhdCI6MTc0ODg5MzQ2Nywic2lkIjoiMWVkZDQwMTYtMDIzNy00ZGQ4LTg2YjEtZmYxZTIxNmViNmRhIn0.YKKJde2-ZssP87c05c35E18GrOVZMgcsQtU2q_26Kot-tegZYiguiDC2y0jDU8Mn7ay7KJkRVMjC8UDmcSXkGhgi0d-45zw_qHuoukeAFdn_Uh4I48AUuq7ba7asKM44XV3yLySYUIX6InJT3Y0z1mGWafeZx7gmCPwCq52Il4ETSaC7Kh4z-2bk4KdLK3_MHLTH6V9FH3pLRKDv9zzxY5KeY__9ar8RzAFt8OERucpEUyC-_qgF18aMl6rdg3LuoEpI30cVrmfXkcqqvl9Jjl0DDE_PowPZARf9hSMpDEb5Vc7xKsOOfQLT_co0xh4-EHtcJmDl5zAqsOO8u5arGoB7fhnd4bmD-QYIzyGOc7jeg2vUrcP6-dccCfvz6wixJ1JQZyT9BKUaelYyp96HYWB9APUw3cyaQM3vX01la5gvBqgYDFynu5GIBwCLzeSqp7-qI6m-8UCgfCqotNdCdqW1zON4u71sGHAfsxWX1EQIG_UomeIpZDPl_7XCPioWYrrwVhnSTsygXzYtlYzUoiDGG4tQQMjn-hPGf21ZT1T0pgzI2pYdWgVE03DlHbe49mlWS7_TotSzOU_48nyvWrG2K6lSE4P9ihFp-j25RHmvA_J3snQbJooOXz5Bvg6thVpkTkMHz4_v9U_KeoFZRiTJ3T_VyuG_FKV4g0F2g3s",
-      initPhrase: "запусти congratulate",
+      token: process.env.REACT_APP_TOKEN,
+      initPhrase: `запусти ${process.env.REACT_APP_SMARTAPP}`,
       getState,
       settings: {
-        dubbing: true, // включение озвучки
+        dubbing: true, // включает озвучку
       },
     });
   }
