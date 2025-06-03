@@ -14,7 +14,7 @@ const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
       token: process.env.REACT_APP_TOKEN,
-      initPhrase: `запусти ${process.env.REACT_APP_SMARTAPP}`,
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
       getState,
       settings: {
         dubbing: true, // включает озвучку
@@ -58,7 +58,7 @@ const App = () => {
         }
 
         if (event.type === "smart_app_data") {
-          const action = event.action;
+          const action = event.action; // 👈 заменили command на action
           if (action?.type === "go_to_category" && action?.category) {
             setCategory(action.category);
           } else if (action?.type === "go_home") {
@@ -143,7 +143,13 @@ const App = () => {
                 <button
                   className="button"
                   key={key}
-                  onClick={() => setCategory(key)}
+                  onClick={() => {
+                    setCategory(key);
+                    assistant?.sendAction({
+                      type: "go_to_category",
+                      category: key,
+                    });
+                  }}
                 >
                   <span className="button__inner">{label}</span>
                 </button>
