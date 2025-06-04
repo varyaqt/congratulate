@@ -37,6 +37,8 @@ const App = () => {
     try {
       const assistantInstance = initializeAssistant(getState);
 
+      assistantInstance.sendData({ action: { type: "start" } });
+
       // Добавляем обработчик ошибок соединения
       assistantInstance.on("error", (error) => {
         console.error("Assistant error:", error);
