@@ -30,14 +30,21 @@ const App = () => {
   const [initError, setInitError] = useState(null); // Новое состояние для ошибки
 
   useEffect(() => {
-    const getState = () => ({
-      category,
-    });
+    //const getState = () => ({
+      //category,
+    //});
+    const getState = () => {
+      const state = {
+        item_selector: {
+          items: [],
+          ignored_words: [],
+        },
+      };
+      return state;
+    };
 
     try {
       const assistantInstance = initializeAssistant(getState);
-
-      assistantInstance.sendData({ action: { type: "start" } });
 
       // Добавляем обработчик ошибок соединения
       assistantInstance.on("error", (error) => {
