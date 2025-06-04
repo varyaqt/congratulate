@@ -27,26 +27,20 @@ const initializeAssistant = (getState) => {
 const App = () => {
   const [category, setCategory] = useState(null);
   const [assistant, setAssistant] = useState(null);
-  const [initError, setInitError] = useState(null); // Новое состояние для ошибки
+  const [initError, setInitError] = useState(null);
+  const [launched, setLaunched] = useState(false); // предотвращает повторный старт
 
   useEffect(() => {
-    //const getState = () => ({
-      //category,
-    //});
-    const getState = () => {
-      const state = {
-        item_selector: {
-          items: [],
-          ignored_words: [],
-        },
-      };
-      return state;
-    };
+    const getState = () => ({
+      item_selector: {
+        items: [],
+        ignored_words: [],
+      },
+    });
 
     try {
       const assistantInstance = initializeAssistant(getState);
 
-      // Добавляем обработчик ошибок соединения
       assistantInstance.on("error", (error) => {
         console.error("Assistant error:", error);
         setInitError(
@@ -57,17 +51,23 @@ const App = () => {
       const handleData = (event) => {
         console.log("Событие от ассистента:", event);
 
+        // предотвращаем повторную активацию при уже запущенном навыке
+        if (event.type === "tts_state_update" && event.state === "start" && launched) {
+          console.log("Повторный старт проигнорирован");
+          return;
+        }
+
         if (event.type === "navigation") {
           const { command } = event.navigation;
           if (command === "go_to_category" && event?.navigation?.category) {
-            setCategory(event?.navigation?.category);
+            setCategory(event.navigation.category);
           } else if (command === "go_home") {
             setCategory(null);
           }
         }
 
         if (event.type === "smart_app_data") {
-          const action = event.action; 
+          const action = event.action;
           if (action?.type === "go_to_category" && action?.category) {
             setCategory(action.category);
           } else if (action?.type === "go_home") {
@@ -75,66 +75,45 @@ const App = () => {
           }
         }
 
-        // Обработка голосовых команд (ASR) - ЗАМЕНЯЕМ ЭТУ ЧАСТЬ
         if (event.type === "voice") {
           const text = event.asr?.hypotheses?.[0]?.text?.toLowerCase() || "";
-          console.log("Распознанная голосовая команда:", text); // Добавляем лог
+          console.log("Голосовая команда:", text);
 
-          // Улучшенная обработка команд
-          if (
-            text.includes("день рождения") ||
-            text.includes("с днем рождения")
-          ) {
+          if (text.includes("день рождения")) {
             setCategory("birthday");
-            assistant?.sendAction({
-              type: "go_to_category",
-              category: "birthday",
-            });
-          } else if (
-            text.includes("новый год") ||
-            text.includes("с новым годом")
-          ) {
+            assistantInstance.sendAction({ type: "go_to_category", category: "birthday" });
+          } else if (text.includes("новый год")) {
             setCategory("newyear");
-            assistant?.sendAction({
-              type: "go_to_category",
-              category: "newyear",
-            });
-          } else if (text.includes("любим") || text.includes("для любимых")) {
+            assistantInstance.sendAction({ type: "go_to_category", category: "newyear" });
+          } else if (text.includes("любим")) {
             setCategory("love");
-            assistant?.sendAction({ type: "go_to_category", category: "love" });
-          } else if (
-            text.includes("универсаль") ||
-            text.includes("универсальные")
-          ) {
+            assistantInstance.sendAction({ type: "go_to_category", category: "love" });
+          } else if (text.includes("универсаль")) {
             setCategory("universal");
-            assistant?.sendAction({
-              type: "go_to_category",
-              category: "universal",
-            });
+            assistantInstance.sendAction({ type: "go_to_category", category: "universal" });
           } else if (
-            text.includes("назад") ||
-            text.includes("меню") ||
-            text.includes("домой")
+            (text.includes("назад") || text.includes("меню") || text.includes("домой")) &&
+            category !== null
           ) {
             setCategory(null);
-            assistant?.sendAction({ type: "go_home" });
+            assistantInstance.sendAction({ type: "go_home" });
           }
         }
+
+        if (!launched) setLaunched(true);
       };
 
       assistantInstance.on("data", handleData);
       setAssistant(assistantInstance);
     } catch (e) {
       console.error("Assistant initialization failed:", e);
-      setInitError(
-        "Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию."
-      );
+      setInitError("Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию.");
     }
 
     return () => {
       if (assistant?.close) assistant.close();
     };
-  }, [category]);
+  }, [launched]);
 
   return (
     <div className="container">
@@ -171,7 +150,10 @@ const App = () => {
           <h1 className="header__title">{categories[category]}</h1>
           <button
             className="button button__back"
-            onClick={() => setCategory(null)}
+            onClick={() => {
+              setCategory(null);
+              assistant?.sendAction({ type: "go_home" });
+            }}
           >
             <span className="button__inner">Вернуться в меню</span>
           </button>
