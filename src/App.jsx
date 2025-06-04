@@ -14,7 +14,7 @@ const initializeAssistant = (getState) => {
   if (process.env.NODE_ENV === "development") {
     return createSmartappDebugger({
       token: process.env.REACT_APP_TOKEN,
-      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`, // REACT_APP_SMARTAPP="поздравления для важных событий" !!!!
       getState,
       settings: {
         dubbing: true, // включает озвучку
