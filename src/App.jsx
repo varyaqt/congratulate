@@ -67,7 +67,7 @@ const App = () => {
         }
 
         if (event.type === "smart_app_data") {
-          const action = event.action; // 👈 заменили command на action
+          const action = event.action; 
           if (action?.type === "go_to_category" && action?.category) {
             setCategory(action.category);
           } else if (action?.type === "go_home") {
