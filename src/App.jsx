@@ -67,7 +67,10 @@ const App = () => {
         }
 
         if (event.type === "smart_app_data") {
-          const action = event.action;
+          console.log("Получен smart_app_data:", event.smart_app_data);
+          console.log("Получен action:", event.action);
+
+          const action = event.smart_app_data || event.action;
           if (action?.type === "go_to_category" && action?.category) {
             setCategory(action.category);
           } else if (action?.type === "go_home") {
