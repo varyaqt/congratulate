@@ -285,6 +285,7 @@ a:after {
 }
 .greet {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--color-pink);

@@ -52,7 +52,11 @@ const App = () => {
         console.log("Событие от ассистента:", event);
 
         // предотвращаем повторную активацию при уже запущенном навыке
-        if (event.type === "tts_state_update" && event.state === "start" && launched) {
+        if (
+          event.type === "tts_state_update" &&
+          event.state === "start" &&
+          launched
+        ) {
           console.log("Повторный старт проигнорирован");
           return;
         }
@@ -84,18 +88,32 @@ const App = () => {
 
           if (text.includes("день рождения")) {
             setCategory("birthday");
-            assistantInstance.sendAction({ type: "go_to_category", category: "birthday" });
+            assistantInstance.sendAction({
+              type: "go_to_category",
+              category: "birthday",
+            });
           } else if (text.includes("новый год")) {
             setCategory("newyear");
-            assistantInstance.sendAction({ type: "go_to_category", category: "newyear" });
+            assistantInstance.sendAction({
+              type: "go_to_category",
+              category: "newyear",
+            });
           } else if (text.includes("любим")) {
             setCategory("love");
-            assistantInstance.sendAction({ type: "go_to_category", category: "love" });
+            assistantInstance.sendAction({
+              type: "go_to_category",
+              category: "love",
+            });
           } else if (text.includes("универсаль")) {
             setCategory("universal");
-            assistantInstance.sendAction({ type: "go_to_category", category: "universal" });
+            assistantInstance.sendAction({
+              type: "go_to_category",
+              category: "universal",
+            });
           } else if (
-            (text.includes("назад") || text.includes("меню") || text.includes("домой")) &&
+            (text.includes("назад") ||
+              text.includes("меню") ||
+              text.includes("домой")) &&
             category !== null
           ) {
             setCategory(null);
@@ -110,7 +128,9 @@ const App = () => {
       setAssistant(assistantInstance);
     } catch (e) {
       console.error("Assistant initialization failed:", e);
-      setInitError("Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию.");
+      setInitError(
+        "Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию."
+      );
     }
 
     return () => {
@@ -162,9 +182,13 @@ const App = () => {
           </button>
           <ul className="congratulations__inner">
             {data[category].map((text, index) => (
-              <li className="greet" key={index}>
-                {text}
-              </li>
+              <li
+                className="greet"
+                key={index}
+                dangerouslySetInnerHTML={{
+                  __html: text.replace(/\n/g, "<br/>"),
+                }}
+              />
             ))}
           </ul>
         </>
