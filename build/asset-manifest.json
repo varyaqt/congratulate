@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.677b59e3.css",
-    "main.js": "/static/js/main.1867c39e.js",
+    "main.css": "/static/css/main.f61f2d1b.css",
+    "main.js": "/static/js/main.2ddbc9fd.js",
     "static/media/GreatVibes-Regular.woff2": "/static/media/GreatVibes-Regular.002f4e6dadeccfa7f97c.woff2",
     "static/media/Gabriela-Regular.woff2": "/static/media/Gabriela-Regular.d5c85cad4370b8d43e1c.woff2",
     "static/media/decoration_top.svg": "/static/media/decoration_top.c030693bc2dd587ff672.svg",
     "static/media/decoration_down.svg": "/static/media/decoration_down.abb7662b849aec14200c.svg",
     "index.html": "/index.html",
-    "main.677b59e3.css.map": "/static/css/main.677b59e3.css.map",
-    "main.1867c39e.js.map": "/static/js/main.1867c39e.js.map"
+    "main.f61f2d1b.css.map": "/static/css/main.f61f2d1b.css.map",
+    "main.2ddbc9fd.js.map": "/static/js/main.2ddbc9fd.js.map"
   },
   "entrypoints": [
-    "static/css/main.677b59e3.css",
-    "static/js/main.1867c39e.js"
+    "static/css/main.f61f2d1b.css",
+    "static/js/main.2ddbc9fd.js"
   ]
 }
