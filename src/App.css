@@ -102,9 +102,9 @@ svg * {
   font-display: swap;
 }
 :root {
-  --color-yellow: #fbd680;
-  --color-pink: #fbaf87;
-  --color-red: #a0214c;
+  --color-yellow: #f6d48b;
+  --color-pink: #e2816c;
+  --color-red: #76203d;
   --font-family-base: "Gabriela", sans-serif;
   --font-family-accent: "Great Vibes", sans-serif;
   --border: 0.1875rem solid var(--color-red);
