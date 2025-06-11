@@ -323,13 +323,16 @@ a:after {
       left;
   mask-size: 51% 51%;
   mask-repeat: no-repeat;
+  transition: background-color var(--transition-duration);
 }
+
 .button__inner {
   color: var(--color-red);
   position: relative;
   display: inline-flex;
   align-items: center;
   text-align: center;
+  transition: color var(--transition-duration);
 }
 
 .button__back {
@@ -337,26 +340,29 @@ a:after {
   margin-bottom: 20px;
   width: 70%;
 }
-@media (any-hover: hover) {
-  .button__inner:hover:after {
-    width: 70%;
-  }
-}
-@media (any-hover: none) {
-  .button__inner:active:after {
-    width: 70%;
-  }
-}
+
+/* Удаляем псевдоэлемент :after, который создавал подчеркивание */
 .button__inner:after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  translate: -50%;
-  width: 0;
-  height: 0.125rem;
-  background-color: currentColor;
-  transition-duration: var(--transition-duration);
+  display: none;
+}
+
+/* Эффект при наведении - меняем цвет фона кнопки и цвет текста */
+@media (any-hover: hover) {
+  .button:hover {
+    background-color: var(--color-red); /* или любой другой цвет */
+  }
+  .button:hover .button__inner {
+    color: var(--color-pink); /* или контрастный цвет */
+  }
+}
+
+@media (any-hover: none) {
+  .button:active {
+    background-color: var(--color-red);
+  }
+  .button:active .button__inner {
+    color: var(--color-pink);
+  }
 }
 .menu__inner {
   display: flex;
