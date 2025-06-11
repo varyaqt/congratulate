@@ -38,8 +38,25 @@ const App = () => {
       },
     });
 
+    const handleBack = (e) => {
+      if (e.key === "Escape" || e.detail?.type === "back") {
+        setCategory(null);
+        if (assistant) {
+          assistant.sendData({
+            type: "navigation",
+            navigation: { command: "go_home" },
+            items: [],
+            pronounceText: "Возвращаю в главное меню",
+          });
+        }
+      }
+    };
+
     try {
       const assistantInstance = initializeAssistant(getState);
+
+      window.addEventListener("keydown", handleBack);
+      window.addEventListener("back_button_pressed", handleBack);
 
       assistantInstance.on("error", (error) => {
         console.error("Assistant error:", error);
@@ -65,20 +82,71 @@ const App = () => {
           const { command } = event.navigation;
           if (command === "go_to_category" && event?.navigation?.category) {
             setCategory(event.navigation.category);
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: {
+                command: "go_to_category",
+                category: event.navigation.category,
+              },
+              items: [],
+              pronounceText: `Открываю ${
+                categories[event.navigation.category]
+              }`,
+            });
+            return;
           } else if (command === "go_home") {
             setCategory(null);
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_home" },
+              items: [],
+              pronounceText: "Возвращаю в главное меню",
+            });
+            return;
           }
         }
 
         if (event.type === "smart_app_data") {
-          console.log("Получен smart_app_data:", event.smart_app_data);
-          console.log("Получен action:", event.action);
-
           const action = event.smart_app_data || event.action;
+          console.log("Получено действие:", action);
+
+          // Обработка команды "назад" с пульта
+          if (
+            action?.type === "server_action" &&
+            action?.action_id === "back"
+          ) {
+            setCategory(null);
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_home" },
+              items: [],
+              pronounceText: "Возвращаю в главное меню",
+            });
+            return;
+          }
+
+          // Ваши кастомные действия
           if (action?.type === "go_to_category" && action?.category) {
             setCategory(action.category);
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: {
+                command: "go_to_category",
+                category: action.category,
+              },
+              items: [],
+              pronounceText: `Открываю ${categories[action.category]}`,
+            });
+            return;
           } else if (action?.type === "go_home") {
             setCategory(null);
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_home" },
+              items: [],
+              pronounceText: "Возвращаю в главное меню",
+            });
+            return;
           }
         }
 
@@ -88,28 +156,40 @@ const App = () => {
 
           if (text.includes("день рождения")) {
             setCategory("birthday");
-            assistantInstance.sendAction({
-              type: "go_to_category",
-              category: "birthday",
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_to_category", category: "birthday" },
+              items: [],
+              pronounceText: "Открываю поздравления с Днём рождения",
             });
+            return;
           } else if (text.includes("новый год")) {
             setCategory("newyear");
-            assistantInstance.sendAction({
-              type: "go_to_category",
-              category: "newyear",
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_to_category", category: "newyear" },
+              items: [],
+              pronounceText: "Открываю новогодние поздравления",
             });
+            return;
           } else if (text.includes("любим")) {
             setCategory("love");
-            assistantInstance.sendAction({
-              type: "go_to_category",
-              category: "love",
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_to_category", category: "love" },
+              items: [],
+              pronounceText: "Открываю поздравления для любимых",
             });
+            return;
           } else if (text.includes("универсаль")) {
             setCategory("universal");
-            assistantInstance.sendAction({
-              type: "go_to_category",
-              category: "universal",
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_to_category", category: "universal" },
+              items: [],
+              pronounceText: "Открываю универсальные поздравления",
             });
+            return;
           } else if (
             (text.includes("назад") ||
               text.includes("меню") ||
@@ -117,25 +197,42 @@ const App = () => {
             category !== null
           ) {
             setCategory(null);
-            assistantInstance.sendAction({ type: "go_home" });
+            assistantInstance.sendData({
+              type: "navigation",
+              navigation: { command: "go_home" },
+              items: [],
+              pronounceText: "Возвращаю в главное меню",
+            });
+            return;
           }
         }
 
-        if (!launched) setLaunched(true);
+        if (!launched) {
+          setLaunched(true);
+          assistantInstance.sendData({
+            type: "smart_app_data",
+            smart_app_data: { type: "welcome" },
+            items: [],
+            pronounceText: "Добро пожаловать! Выберите категорию поздравлений.",
+          });
+        }
       };
 
       assistantInstance.on("data", handleData);
       setAssistant(assistantInstance);
+
+      // Функция очистки
+      return () => {
+        window.removeEventListener("keydown", handleBack);
+        window.removeEventListener("back_button_pressed", handleBack);
+        if (assistantInstance?.close) assistantInstance.close();
+      };
     } catch (e) {
       console.error("Assistant initialization failed:", e);
       setInitError(
         "Навык не зарегистрирован или указаны ошибочные данные. Проверьте аутентификацию."
       );
     }
-
-    return () => {
-      if (assistant?.close) assistant.close();
-    };
   }, [launched]);
 
   return (
